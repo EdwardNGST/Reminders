@@ -97,4 +97,15 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 tableName+";", null);
     }
 
+    public Cursor getReminders(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT "+
+                idReminder+" , "+
+                titleReminder+" , "+
+                textReminder+" , "+
+                priorityReminder+" FROM "+
+                tableName+" WHERE "+
+                idReminder+" = "+id+";", null);
+    }
+
 }
