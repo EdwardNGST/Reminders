@@ -8,4 +8,9 @@
     <string name="todo">TODO</string>
     <string name="reminderTitle">Titulo del Recordatorio</string>
     <string name="reminderDesc">Descripción del Recordatorio</string>
+    <string name="setPriorityReminder">Seleccione la prioridad de su recordatorio</string>
+    <string name="urgent">Urgente</string>
+    <string name="important">Importante</string>
+    <string name="normal">Normal</string>
+    <string name="register">Registrar</string>
 </resources>

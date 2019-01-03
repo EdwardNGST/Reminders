@@ -1,6 +1,8 @@
 package com.example.alan_.reminders.Activity;
 
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.alan_.reminders.Model.DatabaseHelper;
 import com.example.alan_.reminders.Model.Reminders;
 import com.example.alan_.reminders.Model.RemindersAdapter;
 import com.example.alan_.reminders.R;
@@ -25,6 +28,8 @@ public class HomeFragment extends Fragment {
     private RecyclerView rvReminders;
     private ArrayList<Reminders> remindersList;
     private RemindersAdapter remindersAdapter;
+    //El DatabaseHelper es la base de nuestra base de datos local
+    private DatabaseHelper localDB;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -45,7 +50,21 @@ public class HomeFragment extends Fragment {
         rvReminders.setAdapter(remindersAdapter);
         rvReminders.setHasFixedSize(true);
 
-        remindersList.add(new Reminders(1, "Recordatorio 1", "Recordatorio texto1", 1));
+        localDB = new DatabaseHelper(context);
+
+        Cursor res=localDB.getReminders();
+
+        for (res.moveToFirst(); !res.isAfterLast(); res.moveToNext()) {
+            //Cada una de las posiciones del registro obtenido por el cursor se asignan a una variable
+            int id = res.getInt(0);
+            String title = res.getString(1);
+            String text = res.getString(2);
+            int priority = res.getInt(3);
+
+            //Se agrega la tarea a la lista que esta enlazada con el recyclerview, por lo tanto se actualiza el recyclerview
+            remindersList.add(new Reminders(id, title, text, priority));
+        }
+
         return view;
     }
 
@@ -55,9 +74,7 @@ public class HomeFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
-        } else {
-
-        }
+        } else { }
     }
 
     @Override
@@ -72,12 +89,15 @@ public class HomeFragment extends Fragment {
     }
 
     private class ClickListener implements View.OnClickListener {
+        private final Context context;
         public ClickListener(Context context) {
+            this.context=context;
         }
 
         @Override
         public void onClick(View view) {
-
+            Intent intent = new Intent(context, com.example.alan_.reminders.Activity.DetailsReminder.class);
+            startActivityForResult(intent, 0);
         }
     }
 }

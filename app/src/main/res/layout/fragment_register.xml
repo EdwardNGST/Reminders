@@ -1,14 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="15dp"
     tools:context=".Activity.RegisterFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <EditText
+        android:id="@+id/txtTitle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Register Fragment" />
+        android:layout_height="wrap_content"
+        android:hint="@string/reminderTitle"
+        android:inputType="text" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/txtDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:hint="@string/reminderDesc"
+        android:inputType="textMultiLine"
+        android:layout_below="@+id/txtTitle"/>
+
+    <TextView
+        android:id="@+id/lblPriority"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:text="@string/setPriorityReminder"
+        android:layout_below="@+id/txtDesc"/>
+
+    <RadioGroup
+        android:id="@+id/rg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/lblPriority">
+
+        <RadioButton
+            android:id="@+id/rb1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_weight="1"
+            android:text="@string/urgent" />
+
+        <RadioButton
+            android:id="@+id/rb2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_weight="1"
+            android:text="@string/important" />
+
+        <RadioButton
+            android:id="@+id/rb3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_weight="1"
+            android:text="@string/normal" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:layout_below="@+id/rg"
+        android:text="@string/register"/>
+
+</RelativeLayout>
