@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.alan_.reminders.Model.DatabaseHelper;
 import com.example.alan_.reminders.Model.Reminders;
@@ -43,7 +44,7 @@ public class HomeFragment extends Fragment {
         clickListener = new ClickListener(context);
         rvReminders = view.findViewById(R.id.rvListReminders);
         remindersList=new ArrayList<>();
-        remindersAdapter=new RemindersAdapter(remindersList);
+        remindersAdapter=new RemindersAdapter(context, remindersList);
         rvReminders.setItemAnimator(new DefaultItemAnimator());
         RecyclerView.LayoutManager manager=new LinearLayoutManager(context);
         rvReminders.setLayoutManager(manager);
@@ -96,8 +97,19 @@ public class HomeFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
+            //goToDetails(view);
             Intent intent = new Intent(context, com.example.alan_.reminders.Activity.DetailsReminder.class);
             startActivityForResult(intent, 0);
+        }
+
+        private void goToDetails(View v){
+            int seleccionado;
+            RecyclerView.ViewHolder contenedor;
+            // Obtener la posicion del elemento
+            seleccionado = rvReminders.getChildAdapterPosition(v);
+
+            // Obtener la vista empaquetada
+            contenedor = rvReminders.findViewHolderForAdapterPosition(seleccionado);
         }
     }
 }

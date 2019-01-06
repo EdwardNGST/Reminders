@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    android:background="#00897b">
+
+    <EditText
+        android:id="@+id/txtTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/reminderTitle"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/txtDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:hint="@string/reminderDesc"
+        android:inputType="textMultiLine"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
+        android:layout_below="@+id/txtTitle"/>
+
+    <TextView
+        android:id="@+id/lblPriority"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:text="@string/setPriorityReminder"
+        android:textColor="@color/colorWhite"
+        android:layout_below="@+id/txtDesc"/>
+
+    <RadioGroup
+        android:id="@+id/rg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:layout_below="@+id/lblPriority">
+
+        <RadioButton
+            android:id="@+id/rb1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_weight="1"
+            android:textColor="@color/colorWhite"
+            android:text="@string/urgent" />
+
+        <RadioButton
+            android:id="@+id/rb2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_weight="1"
+            android:textColor="@color/colorWhite"
+            android:text="@string/important" />
+
+        <RadioButton
+            android:id="@+id/rb3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_weight="1"
+            android:textColor="@color/colorWhite"
+            android:text="@string/normal" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/lblOk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Modificar"
+        android:layout_alignParentEnd="true"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:paddingBottom="15sp"
+        android:layout_below="@+id/rg"/>
+
+    <TextView
+        android:id="@+id/lblCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancelar"
+        android:layout_toStartOf="@+id/lblOk"
+        android:textColor="@color/colorWhite"
+        android:paddingBottom="15dp"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:layout_below="@+id/rg"
+        android:paddingEnd="20dp"/>
+
+</RelativeLayout>

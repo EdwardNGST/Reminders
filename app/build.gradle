@@ -28,4 +28,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     //Dependencia ButtonNavigation
     implementation 'com.android.support:design:28.0.0'
+    //Dependencia Toolbar
+    implementation 'com.android.support:appcompat-v7:28.0.0'
 }

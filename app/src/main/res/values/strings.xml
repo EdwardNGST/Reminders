@@ -13,4 +13,6 @@
     <string name="important">Importante</string>
     <string name="normal">Normal</string>
     <string name="register">Registrar</string>
+    <string name="delete">Eliminar</string>
+    <string name="edit">Editar</string>
 </resources>

@@ -108,4 +108,24 @@ public class DatabaseHelper extends SQLiteOpenHelper{
                 idReminder+" = "+id+";", null);
     }
 
+
+    public void updateReminder(int id, String title, String description, int priority) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query="";
+        query="UPDATE "+tableName+
+            " SET "+titleReminder+" = '"+title+"',"+
+                textReminder+" = '"+description+"',"+
+                priorityReminder+" = "+priority+" WHERE "+
+                idReminder+" = "+id+";";
+        db.execSQL(query);
+    }
+
+    public void deleteReminder(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query="";
+        query="DELETE FROM "+tableName+
+                " WHERE "+
+                idReminder+" = "+id+";";
+        db.execSQL(query);
+    }
 }
