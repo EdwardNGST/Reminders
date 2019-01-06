@@ -15,4 +15,7 @@
     <string name="register">Registrar</string>
     <string name="delete">Eliminar</string>
     <string name="edit">Editar</string>
+    <string name="reminders">Recordatorios</string>
+    <string name="update">Modificar</string>
+    <string name="cancel">Cancelar</string>
 </resources>
