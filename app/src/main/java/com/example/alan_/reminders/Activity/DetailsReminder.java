@@ -1,19 +1,13 @@
 package com.example.alan_.reminders.Activity;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,24 +17,16 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.alan_.reminders.Activity.Dialog.ShowDialogUpdate;
-import com.example.alan_.reminders.MainActivity;
 import com.example.alan_.reminders.Model.DatabaseHelper;
-import com.example.alan_.reminders.Model.Reminders;
 import com.example.alan_.reminders.Model.RemindersAdapter;
 import com.example.alan_.reminders.R;
-
-import org.w3c.dom.Text;
+import java.util.Objects;
 
 public class DetailsReminder extends AppCompatActivity {
 
-    private RelativeLayout layout_title;
-    private TextView lblTitle2, lblDescription2;
     private Context context;
     //El DatabaseHelper es la base de nuestra base de datos local
     private DatabaseHelper localDB;
-    private Toolbar mTopToolbar;
     private AlertDialog dialog;
 
     private int id;
@@ -53,10 +39,10 @@ public class DetailsReminder extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_reminder);
         context=getApplicationContext();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        layout_title=findViewById(R.id.layout_title);
-        lblTitle2=findViewById(R.id.lblTitle2);
-        lblDescription2=findViewById(R.id.lblDescription2);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+        RelativeLayout layout_title = findViewById(R.id.layout_title);
+        TextView lblTitle2 = findViewById(R.id.lblTitle2);
+        TextView lblDescription2 = findViewById(R.id.lblDescription2);
 
         localDB = new DatabaseHelper(context);
         Intent intent = getIntent();
@@ -94,7 +80,8 @@ public class DetailsReminder extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        Intent intent = new Intent(context, com.example.alan_.reminders.MainActivity.class);
+        startActivity(intent);
         return false;
     }
 
@@ -133,7 +120,7 @@ public class DetailsReminder extends AppCompatActivity {
         //Se enlaza la vista con el Builder
         final EditText txtTitle = mView.findViewById(R.id.txtTitle);
         final EditText txtDesc = mView.findViewById(R.id.txtDesc);
-        final RadioGroup rg = mView.findViewById(R.id.rg);
+        RadioGroup rg = mView.findViewById(R.id.rg);
         RadioButton rb1 = mView.findViewById(R.id.rb1);
         RadioButton rb2 = mView.findViewById(R.id.rb2);
         RadioButton rb3 = mView.findViewById(R.id.rb3);
@@ -164,31 +151,32 @@ public class DetailsReminder extends AppCompatActivity {
                 priorityChecked[0]=3;
                 break;
         }
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch (i){
+                    case R.id.rb1:
+                        priorityChecked[0]=1;
+                        break;
+                    case R.id.rb2:
+                        priorityChecked[0]=2;
+                        break;
+                    case R.id.rb3:
+                        priorityChecked[0]=3;
+                        break;
+                    default:
+                        priorityChecked[0]=0;
+                }
+            }
+        });
         
         lblOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                        switch (i){
-                            case R.id.rb1:
-                                priorityChecked[0]=1;
-                                break;
-                            case R.id.rb2:
-                                priorityChecked[0]=2;
-                                break;
-                            case R.id.rb3:
-                                priorityChecked[0]=3;
-                                break;
-                            default:
-                                priorityChecked[0]=0;
-                        }
-                    }
-                });
                 localDB.updateReminder(id, txtTitle.getText().toString(), txtDesc.getText().toString(), priorityChecked[0]);
                 dialog.hide();
                 Toast.makeText(context, "Recordatorio Actualizado", Toast.LENGTH_SHORT).show();
+                startActivity(getIntent());
             }
         });
         lblCancel.setOnClickListener(new View.OnClickListener() {

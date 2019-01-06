@@ -11,14 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.alan_.reminders.Activity.HomeFragment;
 import com.example.alan_.reminders.R;
 
 import java.util.ArrayList;
-
-import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
 public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.ContainerView> {
     public static final String EXTRA_MESSAGE = "com.example.alan_.reminders.MESSAGE";
@@ -75,13 +70,13 @@ public class RemindersAdapter extends RecyclerView.Adapter<RemindersAdapter.Cont
         return remindersList.size();
     }
 
-    public class ContainerView extends RecyclerView.ViewHolder {
+    class ContainerView extends RecyclerView.ViewHolder {
         int id;
         ImageView priorityColor;
         TextView lblTitleTask;
         TextView lblTextTask;
         CardView cardView;
-        public ContainerView(@NonNull View itemView) {
+        ContainerView(@NonNull View itemView) {
             super(itemView);
             this.priorityColor=itemView.findViewById(R.id.priorityColor);
             this.lblTitleTask=itemView.findViewById(R.id.lblTitleTask);

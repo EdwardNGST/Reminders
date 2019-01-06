@@ -1,15 +1,14 @@
 package com.example.alan_.reminders.Activity;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -20,12 +19,10 @@ public class RegisterFragment extends Fragment {
 
     private EditText txtTitle, txtDesc;
     private RadioGroup rg;
-    private RadioButton rb1, rb2, rb3;
     private Button btnRegister;
 
     private int priority;
 
-    private OnFragmentInteractionListener mListener;
     private Context context;
     //El DatabaseHelper es la base de nuestra base de datos local
     private DatabaseHelper localDB;
@@ -40,10 +37,12 @@ public class RegisterFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_register, container, false);
+
+        context=getContext();
 
         localDB = new DatabaseHelper(context);
         declareElements(view);
@@ -83,9 +82,6 @@ public class RegisterFragment extends Fragment {
         txtTitle=view.findViewById(R.id.txtTitle);
         txtDesc=view.findViewById(R.id.txtDesc);
         rg=view.findViewById(R.id.rg);
-        rb1=view.findViewById(R.id.rb1);
-        rb2=view.findViewById(R.id.rb2);
-        rb3=view.findViewById(R.id.rb3);
         btnRegister=view.findViewById(R.id.btnRegister);
     }
 
@@ -101,25 +97,5 @@ public class RegisterFragment extends Fragment {
         txtTitle.setText("");
         txtDesc.setText("");
         rg.check(0);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        this.context=context;
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {  }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }
